@@ -498,6 +498,12 @@ export const generateWAMessageContent = async(
 		}
 	}
 
+	if('contextInfo' in message && !!message.contextInfo) {
+		const [messageType] = Object.keys(m)
+		m[messageType].contextInfo = m[messageType] || {}
+		m[messageType].contextInfo = message.contextInfo
+	}
+
 	return WAProto.Message.fromObject(m)
 }
 
